@@ -19,16 +19,18 @@ public class Todo {
 	private int todo_complete;
 	private int importance_flag;
 	private int total_count;
+	private int incomplete_count;
 	private LocalDateTime create_date;
 	private LocalDateTime update_date;
 	
-	public TodoListRespDto tolistDto() {
+	public TodoListRespDto todolistDto() {
 		return TodoListRespDto.builder()
 				.todoCode(todo_code)
 				.todo(todo_content)
 				.todoComplete(todo_complete)
 				.importance(importance_flag==1)
 				.totalCount(total_count)
+				.incompleteCount(incomplete_count)
 				.crateDate(create_date)
 				.updateDate(update_date)
 				.build();

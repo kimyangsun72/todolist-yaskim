@@ -14,6 +14,7 @@ public class TodoListRespDto {
 	private int todoComplete;
 	private boolean importance;
 	private int totalCount;
+	private int incompleteCount;
 	private LocalDateTime crateDate;
 	private LocalDateTime updateDate;
 

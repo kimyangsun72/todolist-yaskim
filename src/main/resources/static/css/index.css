@@ -1,0 +1,218 @@
+#container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+
+    width: 414px;
+    height: 736px;
+
+    overflow: hidden;
+}
+
+header {
+
+    width: 100%;
+    height: 50px;
+
+    background-color: red;
+}
+
+main {
+    width: 100%;
+    height: 686px;
+    
+    padding: 20px;
+    background-color: white;
+
+}
+.section-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.type-selected {
+background-color: #dbdbdb;
+font-weight: 500;
+}
+
+.type-select-box {
+    display: flex;
+    justify-content: center;
+
+}
+
+.selected-type {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+
+    border: 1px solid #dbdbdb;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+
+    padding: 0px 10px;
+
+    width: 300px ;
+    height: 30px;
+
+    font-size: 16px ;
+
+}
+
+.selected-type-button {
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+    border: 1px solid #dbdbdb;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+
+    width: 30px ;
+    height: 30px;
+
+    font-size: 20px;
+    cursor: pointer;
+
+}
+
+.selected-type-button:active{
+    background-color: #dbdbdb40;
+    
+}
+.type-select-box-list {
+    display: none;
+    
+    border: 1px solid #dbdbdb;
+    border-radius: 5px;
+    overflow: hidden;
+
+    width: 330px;
+
+}
+.type-select-box-list li {
+    display: flex;
+    align-items: center;
+
+    padding: 0px 10px;
+
+    width: 100%;
+    height: 30px;
+    cursor: pointer;
+
+}
+.type-select-box-list li:not(:last-of-type) {
+    border-bottom: 1px solid #dbdbdb;
+
+}
+.type-select-box-list li:hover {
+    background-color: #dbdbdb40;
+
+}
+.incomplete-count-text{
+    margin: 20px 0px ;
+
+}
+.incomplete-count-tnumber {
+    font-weight: 500;
+    color: #44afff;
+
+}
+#Complete-check{
+    display: none;
+
+}
+#Complete-check + label {
+    display: inline-block;
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    border: 2px solid #dbdbdb;
+
+    border-radius: 50%;
+    position: relative;
+
+}
+#Complete-check + label {
+    background-color: #dbdbdb40;
+
+}
+#complete-check:checked + label::after {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    content: '😁';
+    font-size: 30px;
+    color: #5b5b5b;
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    position: absolute;
+    top: -1px;
+    left: 0;
+}
+.todo-content {
+    display: flex;
+    align-items: center;
+
+    margin-bottom: 10px;
+    
+    border-bottom: 1px solid #dbdbdb;
+
+    width: 100%;
+    height: 30px;
+
+    position: relative;
+}
+.trash-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    border-radius: 50%;
+    width: 100%;
+    height: 30px;
+    color: aquamarine;
+
+    background-color: bisque;
+
+    cursor: pointer;
+    position: absolute;
+    right: 5px;
+
+}
+.trash-button:hover {
+    background-color: #44afff;
+
+}
+.trash-button i {
+    font-size: 12px;
+
+}
+.section-body {
+    position: relative;
+    height: 400px;
+}
+.todo-add-button {
+    position: absolute;
+    bottom: 5px;
+    left: 43%;
+
+    border: 3px solid #dbdbdb;
+    border-radius: 50%;
+
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+}
+.todo-add-button i {
+    font-size: 25px;
+    color: #5b5b5b;
+}
+

@@ -11,6 +11,7 @@ import com.yaskim.todolist.domain.todo.Todo;
 import com.yaskim.todolist.domain.todo.TodoRepository;
 import com.yaskim.todolist.web.dto.todo.CreateTodoReqDto;
 import com.yaskim.todolist.web.dto.todo.TodoListRespDto;
+import com.yaskim.todolist.web.dto.todo.UpdateTodoReqDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -41,18 +42,56 @@ public class TodoServiceImpl implements TodoService{
 		}
 	
 	@Override
-	public List<TodoListRespDto> getTodoList(int page, int contentCount) throws Exception {
+	public List<TodoListRespDto> getTodoList(String type, int page, int contentCount) throws Exception {
+		
+		List<Todo> todoList = todoRepository.getTodoList(createGetTodoListMap(type, page, contentCount));
+	
+		return createTodoListRespDtos(todoList);
+	}
+	
+	
+	private Map<String, Object> createGetTodoListMap(String type, int page, int contentCount) {
 		Map<String, Object> map = new HashMap<String, Object>();
+		
+		map.put("type", type);
 		map.put("index", (page-1) * contentCount);
 		map.put("count", contentCount);
-				
-		List<Todo> todoList = todoRepository.getTodoListOfIndex(map);
+		return map;
+		
+	}
+	private List<TodoListRespDto> createTodoListRespDtos(List<Todo> todoList){
 		List<TodoListRespDto> todoListRespDtos = new ArrayList<TodoListRespDto>();
+		
+		
 		todoList.forEach(todo -> {
-			todoListRespDtos.add(todo.tolistDto());
+			todoListRespDtos.add(todo.todolistDto());
 		});
 		return todoListRespDtos;
+		
 	}
+	@Override
+	public boolean updateTodoComplete(int todoCode) throws Exception {
+		// TODO Auto-generated method stub
+		return todoRepository.updateTodoComplete(todoCode)>0;
+	}
+	@Override
+	public boolean updateTodoImportance(int todoCode) throws Exception {
+		
+		return todoRepository.updateTodoImportance(todoCode)>0;
+	}
+	@Override
+	public boolean updateTodo(UpdateTodoReqDto updateTodoReqDto) throws Exception {
+		
+		return todoRepository.updateTodoByTodoCode(updateTodoReqDto.toEntity())>0;
+	
+
+	}
+	@Override
+	public boolean removeTodo(int todoCode) throws Exception {
+	
+		return todoRepository.remove(todoCode)>0;
+	}
+	
 	
 	}
 	

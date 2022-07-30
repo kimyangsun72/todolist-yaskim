@@ -9,5 +9,12 @@ import org.apache.ibatis.annotations.Mapper; //mybatis 이전 버전- ibatis(원
 public interface TodoRepository {
 	
 	public int save(Todo todo) throws Exception;
-	public List<Todo> getTodoListOfIndex(Map<String, Object> map) throws Exception;
+	
+	public List<Todo> getTodoList(Map<String, Object> map) throws Exception;
+
+	public int updateTodoComplete(int Todo_code) throws Exception;
+	public int updateTodoImportance(int Todo_code) throws Exception;
+	public int updateTodoByTodoCode(Todo todo) throws Exception;
+	public int remove(int todo_code) throws Exception;
+	
 }
