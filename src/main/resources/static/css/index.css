@@ -147,9 +147,9 @@ font-weight: 500;
     display: flex;
     justify-content: center;
     align-items: center;
-    content: '😁';
-    font-size: 30px;
-    color: #5b5b5b;
+    content: '√';
+    font-size: 100px;
+    color: black;
     width: 30px;
     height: 30px;
     text-align: center;
@@ -176,9 +176,9 @@ font-weight: 500;
     align-items: center;
 
     border-radius: 50%;
-    width: 100%;
+    width: 8%;
     height: 30px;
-    color: aquamarine;
+    color: rgb(13, 12, 24);
 
     background-color: bisque;
 
@@ -207,8 +207,8 @@ font-weight: 500;
     border: 3px solid #dbdbdb;
     border-radius: 50%;
 
-    width: 40px;
-    height: 40px;
+    width: -1px;
+    height: -1px;
     cursor: pointer;
 }
 .todo-add-button i {
