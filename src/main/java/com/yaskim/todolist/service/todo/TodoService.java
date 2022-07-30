@@ -1,9 +1,6 @@
 package com.yaskim.todolist.service.todo;
 
 import java.util.List;
-import java.util.Map;
-
-import com.yaskim.todolist.domain.todo.Todo;
 import com.yaskim.todolist.web.dto.todo.CreateTodoReqDto;
 import com.yaskim.todolist.web.dto.todo.TodoListRespDto;
 import com.yaskim.todolist.web.dto.todo.UpdateTodoReqDto;
