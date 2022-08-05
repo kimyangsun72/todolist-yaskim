@@ -19,72 +19,69 @@
   </insert>
 	<select id="getTodoList" parameterType="hashmap" resultType="com.yaskim.todolist.domain.todo.Todo">
 		select
-			todo_code,
-			todo_content,
-			todo_complete,
-			importance_flag,
+			tm.todo_code,
+			
+			tm.todo_content,
+			tm.todo_complete,
+			tm.importance_flag,
 			
 			tt.total_count,
 			tc.incomplete_count,
 			
-			create_date,
-			update_date
-		from			
+			tm.create_date,
+			tm.update_date
+			
+		from
 			todo_mst tm
-			LEFT OUTER JOIN (SELECT
-								COUNT(*) AS total_count
-							FROM
-								todo_mst
-							where
-							<choose>
-								<when test='type.equals("importance")'>
-									importance_flag = 1
-								</when>
-								<when test='type.equals("complete")'>
-									todo_complete = 1
-								</when>
-								<when test='type.equals("imincomplete")'>
-									todo_complete = 0
-								</when>
-								<otherwise>
-									1=1
-								</otherwise>
-							
-							</choose>
-								
-								) tt ON (1 = 1)
-			LEFT OUTER JOIN (SELECT
-								COUNT todo_complete AS incomplete_count
+			LEFT OUTER JOIN (select
+											COUNT(*) AS total_count
+										FROM
+											todo_mst
+										where
+										<choose>
+											<when test='type.equals("importance")'>
+												importance_flag = 1
+											</when>
+											<when test='type.equals("complete")'>
+												todo_complete = 1
+											</when>
+											<when test='type.equals("incomplete")'>
+												todo_complete = 0
+											</when>
+											<otherwise>
+												1 = 1
+											</otherwise>
+										</choose>
+											
+											) tt ON (1 = 1)
+			LEFT OUTER JOIN (select
+								COUNT(todo_complete) AS incomplete_count
 							from
 								todo_mst
-							WHERE
-								todo_complete = 0) 
+							where
+								todo_complete = 0
 								<if test='type.equals("importance")'>
-								
-								
+									and importance_flag = 1
 								</if>
-								
-			where 
-				<choose>
-					<when test='type.equals("importance")'>
-						importance_flag = 1
-					</when>
-					<when test='type.equals("complete")'>
-						todo_complete = 1
-					</when>
-					<when test='type.equals("imincomplete")'>
-						todo_complete = 0
-					</when>
-					<otherwise>
-						1=1
-					</otherwise>
-				
-				</choose>
-								
+								) tc ON (1 = 1)
+		where
+			<choose>
+				<when test='type.equals("importance")'>
+					importance_flag = 1
+				</when>
+				<when test='type.equals("complete")'>
+					todo_complete = 1
+				</when>
+				<when test='type.equals("incomplete")'>
+					todo_complete = 0
+				</when>
+				<otherwise>
+					1 = 1
+				</otherwise>
+			</choose>
 		order by
 			todo_code desc
-		limit #{index},#{count}
-	
+		limit #{index}, #{count}
 	</select>
 	<select id="getImportanceTodoListOfIndex" parameterType="hashmap" resultType="com.yaskim.todolist.domain.todo.Todo">
 	select

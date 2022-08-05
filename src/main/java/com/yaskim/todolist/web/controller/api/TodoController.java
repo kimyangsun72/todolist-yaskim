@@ -30,12 +30,12 @@ public class TodoController {
 	private final TodoService todoService;
 	
 	@GetMapping("/list/{type}")
-	public ResponseEntity<?> getTodoList(@RequestParam String type, @RequestParam int page, @RequestParam int contentCount) {
+	public ResponseEntity<?> getTodoList(@PathVariable String type, @RequestParam int page, @RequestParam int contentCount) {
 		List<TodoListRespDto> list = null;
 		try {
 			 list = todoService.getTodoList(type, page, contentCount);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 			return ResponseEntity.internalServerError().body(new CMRespDto<>(-1, page + "page list on load failed", page));
 		}
@@ -59,13 +59,13 @@ public class TodoController {
 		
 	}	
 	
-	@PutMapping("/complete/todo/{todo_code}")
-	public ResponseEntity<?> setCompleteTodo(@PathVariable int todo_code) {
+	@PutMapping("/complete/todo/{todoCode}")
+	public ResponseEntity<?> setCompleteTodo(@PathVariable int todoCode) {
 		boolean status = false;
 		try {
-			status = todoService.updateTodoComplete(todo_code);
+			status = todoService.updateTodoComplete(todoCode);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 			return ResponseEntity.internalServerError().body(new CMRespDto<>(-1, "failed", status));
 		}
@@ -78,7 +78,7 @@ public class TodoController {
 		try {
 			status = todoService.updateTodoImportance(todoCode);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 			return ResponseEntity.internalServerError().body(new CMRespDto<>(-1, "failed", status));
 		}
@@ -92,7 +92,7 @@ public class TodoController {
 			updateTodoReqDto.setTodoCode(todoCode);
 			status = todoService.updateTodo(updateTodoReqDto);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		
 			e.printStackTrace();
 			return ResponseEntity.internalServerError().body(new CMRespDto<>(-1, "failed", status));
 		}
@@ -105,7 +105,7 @@ public class TodoController {
 		
 			status = todoService.removeTodo(todoCode);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 			return ResponseEntity.internalServerError().body(new CMRespDto<>(-1, "failed", status));
 		}

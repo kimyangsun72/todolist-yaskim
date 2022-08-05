@@ -26,9 +26,9 @@ public class Todo {
 	public TodoListRespDto todolistDto() {
 		return TodoListRespDto.builder()
 				.todoCode(todo_code)
-				.todoContent(todo_content)
-				.todoComplete(todo_complete)
-				.importanceFlag(importance_flag==1)
+				.todo(todo_content)
+				.todoComplete(todo_complete == 1)
+				.importance(importance_flag==1)
 				.totalCount(total_count)
 				.incompleteCount(incomplete_count)
 				.crateDate(create_date)

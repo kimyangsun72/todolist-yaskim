@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="https://code.jquery.com"></script>
+    <script src="https://code.jquery.com/jquery-latest.min.js"></script>
 
     <link rel="stylesheet" href="/static/css/style.css">
     <link rel="stylesheet" href="/static/css/index.css">
@@ -24,16 +24,17 @@
         </header>
         <main>
             <section class="section-header">
+                <div class="type-select"></div>
                 <div class="type-select-box">
                     <div class="selected-type">All</div>
-                    <div class="selected-type-button">
+                    <button class="selected-type-button">
                         <i class="fa-solid fa-caret-down"></i>
-                    </div>
+                    </button>
 
                 </div>
-                <ul class="type-select-box-list">
+                <ul class="type-select-box-list visible">
                     <li class="type-selected">All</li>
-                    <li>Impotance</li>
+                    <li>Importance</li>
                     <li>Complete</li>
                     <li>Incomplete</li>
 
@@ -45,21 +46,7 @@
             </section>
             <section class="section-body">
                 <ul class="todo-content-list">
-                    <li class="todo-content">
-                        <input type="checkbox" id="Complete-check">
-                        <label for="Complete-check"></label>
-                        <div>오늘의 할 일</div>
-                        <input type="text" style="display: none;">
-                        <div class="trash-button"><i class="fa-solid fa-trash"></i>
-                        </div>
-
-                        <ul style="display: none;">
-                            <li>Impotance</li>
-                            <li>Complete</li>
-                            <li>Incomplete</li>
-                        </ul>
-                        <div>삭제</div>
-                    </li>
+                   
                 </ul>
                 <div class="todo-add-button"><i class="fa-solid fa-plus"></i>
                 </div>
@@ -67,8 +54,8 @@
 
         </main>
 
-
     </div>
+    <script src="/static/js/index.js"></script>
 
 </body>
 

@@ -83,7 +83,6 @@ public class TodoServiceImpl implements TodoService{
 	public boolean updateTodo(UpdateTodoReqDto updateTodoReqDto) throws Exception {
 		
 		return todoRepository.updateTodoByTodoCode(updateTodoReqDto.toEntity())>0;
-	
 
 	}
 	@Override
