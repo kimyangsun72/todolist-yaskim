@@ -4,6 +4,8 @@ const typeSelectBoxListLis = typeSelectBoxList.querySelectorAll("li");
 const todoContentList = document.querySelector(".todo-content-list");
 const sectionBoby = document.querySelector(".section-body");
 const incompleteCountNumber = document.querySelector(".incomplete-count-number");
+const modalContainer = document.querySelector(".modal-container");
+const todoAddButton = document.querySelector(".todo-add-button");
 
 /*
 	게시글 불러오기
@@ -238,7 +240,7 @@ function clearTodoContentList() {
 
 for(let i = 0; i < typeSelectBoxListLis.length; i++){
 	
-	typeSelectBoxListLis[i].onclick = () => {
+	 [i].onclick = () => {
 		resetPage()
 		
 		removeAllclassList(typeSelectBoxListLis, "type-selected");
@@ -251,14 +253,57 @@ for(let i = 0; i < typeSelectBoxListLis.length; i++){
 		
 		selectedType.textContent = typeSelectBoxListLis[i].textContent;
 		
-		clearTodoContentList();
-		
-		load();
+		;
 		
 		typeSelectBoxList.classList.toggle("visible");
 		
 	}
 	
+}
+
+todoAddButton.onclick = () => {
+	modalContainer.classList.toggle("modal-visible");
+	setModalEvent();
+}
+function clearModalTodoInputValue(modalTodoInput) {
+	modalTodoInput.value = "";
+
+}
+function 
+function setModalEvent() {
+
+	const modalCloseButton = modalContainer.querySelector("modal-close-button");
+	const importanceFlag = modalContainer.querySelector("importance-check");
+	
+	
+	const modalTodoInput = modalContainer.querySelector("modal-todo-input");
+	const modalCommitButton = modalContainer.querySelector("modal-commit-button");
+
+	modalContainer.onclick = () => {
+		if(e.target == modalContainer){
+
+			modalCloseButton.click();
+		}
+	}
+	modalCloseButton.onclick = () => {
+		modalContainer.classList.toggle("modal-visible");
+		todoContentList.style.overflow = "auto";
+		clearModalTodoInputValue(modalTodoInput);
+	}
+	
+	modalTodoIput.onkeyup =() => {
+		if(window.event.keyCode == 13) {
+			modalCommitButton.click();
+		}
+	}
+	modalCommitButton.onclick = () => {
+		data = {
+			importance: importanceFlag.checked;
+		}
+		modalContainer.classList.toggle("modal-visible");
+		todoContentList.style.overflow = "auto";
+		clearModalTodoInputValue(modalTodoInput);
+	}
 }
 
 ///////////////////////////////////////////<<< REQUEST >>>//////////////////////////////////////////////////
@@ -325,17 +370,33 @@ function updateStatus(type, todoCode) {
 
 function deleteTodo(todoContent, todoCode) {
 	$.ajax({
-		type: "delete",
-		url: `/api/v1/todolist/todo/${todoCode}`,
+		type: "delete",                                       //전송 방식(get, post, put, delete) - http method를 나타냄
+		url: `/api/v1/todolist/todo/${todoCode}`,             // 데이터를 받아올 페이지
 		async: false,
-		dataType: "json",
-		success: (response) => {
+		dataType: "json",                                     //받아올 데이터타입/형식(생략가능) html, json, xml 등/ ()참고 - data; 요청시 함께 보낼 parameter)
+		success: (response) => {                              //성공시 수행할 핸들러를 받는다
 			if(response.data){
 				todoContentList.removeChild(todoContent);
 			}
 		},
+		error: errorMessage                                  // 실패시 수행할 핸들러를 받는다
+	})
+}
+function addTodo(data) {
+	result = false;
+	
+	$.ajax({
+		type: "post",
+		url: "/api/v1/todolist/todo",
+		async: false,
+		dataType: "json",
+		success: (response) => {
+			result = response.data
+			
+		},
 		error: errorMessage
 	})
+	return result;
 }
 
 function errorMessage(request, status, error) {
